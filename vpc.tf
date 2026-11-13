@@ -34,6 +34,15 @@ resource "aws_subnet" "public_subnet_az1"{
 }
 
 
+# Public subnet for az2
+resource "aws_public_subnet" "public_subnet_az2"{
+    vpc_id = aws_vpc.main_vpc.id
+
+    cidr_block = var.public_subnetaz2_cidr
+    availability_zone = "us_east_1b"
+}
+
+
 # Creating a route table
 resource "aws_route_table" "main_route_table"{
     vpc_id = aws_vpc.main_vpc.id
@@ -46,4 +55,34 @@ resource "aws_route_table" "main_route_table"{
     tags = {
         name = "joy_main_route_table"
     }
+}
+
+
+# Associating the public_subnet_az1 with the main route table
+resource "aws_route_table_association" "public_subnet_az1_route_table_association"{
+    subnet_id = aws_subnet.public_subnet_az1.id
+    route_table_id = aws_route_table.main_route_table.id
+}
+
+
+#Associating the public_subnet_az2 with the main route table
+resource "aws_route_table_association" "public_subnet_az2_route_table_association"{
+    subnet_id = aws_subnet.public_subnet_az2.id
+    route_table_id = aws_route_table.main_route_table.id
+}
+
+
+# Creating a private appsubnet in az1
+resource "aws_private_subnet" "private_subnet_az1"{
+    vpc_id = aws_vpc.main_vpc.id
+
+    cidr_block = var.private_subnetaz1_cidr
+    availability_zone = "us_east_1a"
+}
+
+# creating a private subnet in az2
+resource "aws_private_subnet" "private_subnet_az2"{
+    vpc_id = aws_vpc.main_vpc.id
+    cidr_block = var.private_subnetaz2_cidr
+    availability_zone - "us_east_1b"
 }
