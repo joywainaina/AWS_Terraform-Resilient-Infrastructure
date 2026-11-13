@@ -22,3 +22,24 @@ variable "private_app_subnet_az1_cidr"{
     description = "cidr block for private subnet1"
     type = string
 }
+
+
+variable "private_app_subnet_az2_cidr"{
+    default = 10.0.3.0/24
+    description = "cidr block for private subnet2"
+    type = string
+}
+
+
+variable "private_data_subnet_az1_cidr"{
+    default = "10.0.4.0/24"
+    description = "cidr block for private data subnet1"
+    type = string
+}
+
+
+variable "private_data_subnet_az2_cidr"{
+    default = 10.0.5.0/24
+    description = "cidr block for private data subnet2"
+    type = string
+}

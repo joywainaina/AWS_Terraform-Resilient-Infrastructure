@@ -27,8 +27,6 @@ resource "aws_subnet" "public_subnet_az1"{
 
     tags = {
         name = "joy public_subnet_az1"
-        availability_zone = 
-
     
     }
 }
@@ -93,5 +91,31 @@ resource "aws_private_subnet" "private_app_subnet_az2"{
 
     tags = {
         name = "joy_private_subnet1b"
+    }
+}
+
+
+# creating a private data subnet in az1
+resource "aws_private_data_subnet""private_app_subnet_az1"{
+    vpc_id = aws_vpc.main_vpc.id
+    cidr_block = var.private_data_subnet_az1_cidr
+    availability_zone = "us_east_1a" 
+    map_public_ip_on_launch = false
+
+    tags = {
+        name = "joy_private_data_subnet_az1"
+    }
+}
+
+# creating a private data subnet in az2
+resource "aws_private_data_subnet""private_app_subnet_az2"{
+    vpc_id = aws_pc.main_vpc.id
+    cidr_block = var.private_data_subnet_az2_cidr
+    availability_zone = "us_east_1b"
+    map_public_ip_on_launch = false
+
+    tags = {
+        name = "joy_private_data_subnet_az2"
+
     }
 }
